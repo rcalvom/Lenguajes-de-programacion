@@ -13,9 +13,9 @@ int main(){
     states[1] = dfa_state(true);
     states[2] = dfa_state(false);
 
-    states[0].value = 0;
-    states[1].value = 1;
-    states[2].value = 2;
+    states[0].identifier = 0;
+    states[1].identifier = 1;
+    states[2].identifier = 2;
 
     states[0].delta['0'] = &states[0];
     states[0].delta['1'] = &states[1];
@@ -31,11 +31,10 @@ int main(){
     deterministic_finite_automaton automaton(&states[0], states, str);
 
     while(automaton.str.size() >= 1){
-        cout << "Value: " << (*(automaton.current_state)).value << "; string: " << automaton.str << endl;
+        cout << "Identifier: " << (*(automaton.current_state)).identifier << "; string: " << automaton.str << endl;
         automaton.consume_symbol();
-        
     }
 
-    cout << (((*(automaton.current_state)).is_acceptance == 1) ? "true" : "false") << endl;
+    cout << "Is acepted? " <<(((*(automaton.current_state)).is_acceptance == 1) ? "true" : "false") << endl;
     return 0;
 }

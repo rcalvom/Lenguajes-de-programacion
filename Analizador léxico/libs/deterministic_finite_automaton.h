@@ -2,16 +2,14 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 class deterministic_finite_automaton{
     public:
         dfa_state* current_state;
-        vector<dfa_state> states;
+        std::vector<dfa_state> states;
         dfa_state* initial_state;
-        string str;
+        std::string str;
 
-        deterministic_finite_automaton(dfa_state* initial_state, vector<dfa_state> states, string str);
+        deterministic_finite_automaton(dfa_state* initial_state, std::vector<dfa_state> states, std::string str);
         void consume_symbol();
         bool process_string();
 };
