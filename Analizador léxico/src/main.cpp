@@ -1,10 +1,14 @@
+#include <vector>
+#include <string>
+
+using namespace std;
+
 int main(){
 
-    
+    vector<string> reserved_words;
 
-    while(true/*Se tenga cadena por procesar*/){
-        // Se pide el siguiente token
-    }
+    // Leer archivo con palabras reservadas.
+
 
     return 0;
 }

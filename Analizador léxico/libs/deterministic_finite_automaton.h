@@ -1,15 +1,21 @@
-#include "dfa_state.h"
 #include <string>
 #include <vector>
+#include <map>
+#include <fstream>
+#include "state.h"
 
 class deterministic_finite_automaton{
+    private:
+        int find_transition(int state, int position);
     public:
-        dfa_state* current_state;
-        std::vector<dfa_state> states;
-        dfa_state* initial_state;
+        std::vector<state> states;
+        std::ifstream delta;
+        state* initial_state;
+        state* current_state;
         std::string str;
+        std::map<char, int> index_delta;
 
-        deterministic_finite_automaton(dfa_state* initial_state, std::vector<dfa_state> states, std::string str);
+        deterministic_finite_automaton(std::vector<state> states, std::string file_delta, state* initial_state, std::string str);
         void consume_symbol();
-        bool process_string();
+        void consume_string();
 };
