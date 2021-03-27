@@ -1,5 +1,6 @@
 #include <sstream>
 #include <string>
+#include <iostream>
 #include "deterministic_finite_automaton.h"
 
 deterministic_finite_automaton::deterministic_finite_automaton(std::vector<state> states, std::string file_delta, state* initial_state, std::string str) :
@@ -19,8 +20,8 @@ states(states), initial_state(initial_state), current_state(initial_state), str(
         values >> value;
         this->index_delta[value] = ++i;
     }
-    /*for(std::map<char, int>::iterator it = this->index.begin(); it != this->index.end(); ++it){
-        std::cout << it->first << it->second << std::endl;
+    /*for(std::map<char, int>::iterator it = this->index_delta.begin(); it != this->index_delta.end(); ++it){
+        std::cout << it->first << " : " << it->second << std::endl;
     }*/
 }
 
