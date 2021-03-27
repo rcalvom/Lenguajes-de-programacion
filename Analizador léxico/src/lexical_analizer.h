@@ -1,11 +1,18 @@
 #include <vector>
+#include <queue>
 #include <string>
 #include "../libs/deterministic_finite_automaton.h"
+#include "token.h"
 
-class lexical_analizer : public deterministic_finite_automaton{
+class lexical_analizer : public deterministic_finite_automaton{       
     public:
-        std::vector<std::string> reseved_words;
+        int row;
+        int col;
+        std::vector<std::string> reserved_words;
+
         lexical_analizer(std::vector<state> states, std::string file_delta, state* initial_state, std::string str, std::string reserved_words_path);
-        void execute();
+        token next_token();
+        bool has_token();
+        bool is_reserved_word(std::string word);
     
 };

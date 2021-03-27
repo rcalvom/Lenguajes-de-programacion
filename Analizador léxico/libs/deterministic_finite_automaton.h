@@ -18,4 +18,6 @@ class deterministic_finite_automaton{
         deterministic_finite_automaton(std::vector<state> states, std::string file_delta, state* initial_state, std::string str);
         void consume_symbol();
         void consume_string();
+        void process_symbol(int position);
+        void process_string();
 };

@@ -25,6 +25,7 @@ fin_seleccionar
 estructura
 fin_estructura
 funcion
+fin_funcion
 retornar
 falso
 verdadero

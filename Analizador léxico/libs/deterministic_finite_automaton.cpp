@@ -9,7 +9,7 @@ states(states), initial_state(initial_state), current_state(initial_state), str(
     this->states = states;
     this->initial_state = initial_state;
     this->current_state = current_state;
-    this->delta.open(file_delta);
+    this->delta.open("src/delta.in");
     std::string line;
     getline(this->delta, line);
     std::stringstream values(line);
@@ -50,5 +50,17 @@ void deterministic_finite_automaton::consume_symbol(){
 void deterministic_finite_automaton::consume_string(){
     while(this->str.size() > 0){
         this->consume_symbol();
+    }
+}
+
+void deterministic_finite_automaton::process_symbol(int position){
+    char a = str.at(position);
+    this->current_state = &this->states[this->find_transition(this->current_state->identifier, this->index_delta.at(a))];
+}
+
+void deterministic_finite_automaton::process_string(){
+    int position = 0;
+    for(int i = 0; i < this->str.size(); i++){
+        this->process_symbol(position);
     }
 }

@@ -1,10 +1,12 @@
-CC = g++
+CXX = g++
 
-all:
-	$(CC) -Ilibs -Isrc libs/deterministic_finite_automaton.cpp libs/state.cpp src/main.cpp src/lexical_analizer.cpp -o build/main
+all: build
+
+build: libs/deterministic_finite_automaton.cpp libs/state.cpp src/main.cpp src/lexical_analizer.cpp src/token.cpp
+	$(CXX) -Ilibs -Isrc libs/deterministic_finite_automaton.cpp libs/state.cpp src/main.cpp src/lexical_analizer.cpp src/token.cpp -o executable/main
 
 build_test:
-	$(CC) -Ilibs libs/deterministic_finite_automaton.cpp libs/state.cpp test/dfa.cpp -o build/test_dfa
+	$(CXX) -Ilibs libs/deterministic_finite_automaton.cpp libs/state.cpp test/dfa.cpp -o executable/test_dfa
 
 run:
-	@./build/main
+	@./executable/main
