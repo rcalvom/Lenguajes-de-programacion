@@ -23,14 +23,20 @@ token lexical_analizer::next_token(){
     int start = 0;
     int row = this->row;
     int col = this->col;
-    while(!this->current_state->acceptance){        
-        this->process_symbol(pointer);
+    while(!this->current_state->acceptance){
+        if(this->current_state->identifier == 19 || this->current_state->identifier == 20 || this->current_state->identifier == 24){
+            if(this->str[pointer] == '*' || this->str[pointer] == '/' || this->str[pointer] == '\n'){
+                this->process_symbol(pointer);
+            }
+        }else{
+            this->process_symbol(pointer);
+        }
         this->col++;
         if(this->current_state->identifier == 0 && this->str[pointer] == '\n'){
             this->row++; row++;
             this->col = 1; col = 1;
             start++;
-        }else if(this->current_state->identifier == 0 && this->str[pointer] == ' '){
+        }else if(this->current_state->identifier == 0 && (this->str[pointer] == ' ' || this->str[pointer] == '\t')){
             col++;
             start++;
         }else if(!this->current_state->acceptance && this->str[pointer] == '\n'){

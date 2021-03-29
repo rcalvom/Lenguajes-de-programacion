@@ -98,6 +98,8 @@ int main(){
         input = input + line + '\n';
     }
 
+    input = input + '\n';
+
     for(int i = 0; i < input.size(); i++){
         if(input[i] == '\r'){
             input.erase(i, 1);
@@ -121,11 +123,8 @@ int main(){
                     }
                     break;
                 case 5: // Entero y Token .
-                    if(t.str == "."){
-                    cout << "<tk_punto," << t.row << "," << t.col << ">" << endl; 
-                    }else{
-                        cout << "<tk_entero," << t.row << "," << t.col << ">" << endl;
-                    }
+                    cout << "<tk_entero," << t.row << "," << t.col << ">" << endl;
+                    cout << "<tk_punto," << t.row << "," << t.col + t.str.size() -1  << ">" << endl; 
                     break;
                 case 7: // Número Real
                     cout << "<tk_real," << t.str << "," << t.row << "," << t.col << ">" << endl;
