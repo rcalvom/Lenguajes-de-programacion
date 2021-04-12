@@ -3,14 +3,30 @@
 #include <iostream>
 #include "deterministic_finite_automaton.h"
 
-deterministic_finite_automaton::deterministic_finite_automaton(std::vector<state> states, std::string file_delta, state* initial_state, std::string str) :
-states(states), initial_state(initial_state), current_state(initial_state), str(str)
-{
-    this->states = states;
-    this->initial_state = initial_state;
-    this->current_state = current_state;
-    this->delta.open("src/delta.in");
+// Constructor del objeto Autómata finito determinista.
+deterministic_finite_automaton::deterministic_finite_automaton(std::string file_states, std::string file_delta, std::string str) :
+str(str)
+{   
+    // Lectura de los estados.
+    std::ifstream states_file;
+    states_file.open(file_states.c_str());
     std::string line;
+    while(getline(states_file, line)){
+        std::stringstream values(line);    
+        int id;
+        values >> id;           
+        bool isAc;
+        values >> isAc;
+        states.push_back(state(id, isAc));        
+    }
+    
+    // Asignación del estado inicial y el estado actual.
+    this->initial_state = &this->states[0];
+    this->current_state = &this->states[0];
+
+    // Creación del diccionario para acelerar la busqueda de las transiciones.
+    this->delta.open(file_delta.c_str());
+    //std::string line;
     getline(this->delta, line);
     std::stringstream values(line);
     int value;
@@ -25,6 +41,7 @@ states(states), initial_state(initial_state), current_state(initial_state), str(
     }*/
 }
 
+// Método para encontrar una transicion en el archivo delta.
 int deterministic_finite_automaton::find_transition(int state, int position){
     this->delta.clear();
     this->delta.seekg(0);
@@ -41,23 +58,27 @@ int deterministic_finite_automaton::find_transition(int state, int position){
     return value;
 }
 
+// Consumir un simbolo de la cadena.
 void deterministic_finite_automaton::consume_symbol(){
     char a = str.at(0);
     this->str = this->str.erase(0, 1);
     this->current_state = &this->states[this->find_transition(this->current_state->identifier, this->index_delta.at(a))];
 }
 
+// Consume la cadena completa.
 void deterministic_finite_automaton::consume_string(){
     while(this->str.size() > 0){
         this->consume_symbol();
     }
 }
 
+// Procesa un simbolo sin consumirlo.
 void deterministic_finite_automaton::process_symbol(int position){
     char a = str.at(position);
     this->current_state = &this->states[this->find_transition(this->current_state->identifier, this->index_delta.at(a))];
 }
 
+// Procesa la cadena sin consumirla.
 void deterministic_finite_automaton::process_string(){
     int position = 0;
     for(int i = 0; i < this->str.size(); i++){

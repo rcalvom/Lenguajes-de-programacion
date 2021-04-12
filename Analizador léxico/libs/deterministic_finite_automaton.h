@@ -15,7 +15,7 @@ class deterministic_finite_automaton{
         std::string str;
         std::map<char, int> index_delta;
 
-        deterministic_finite_automaton(std::vector<state> states, std::string file_delta, state* initial_state, std::string str);
+        deterministic_finite_automaton(std::string file_states, std::string file_delta, std::string str);
         void consume_symbol();
         void consume_string();
         void process_symbol(int position);

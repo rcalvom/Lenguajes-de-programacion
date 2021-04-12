@@ -10,7 +10,7 @@ class lexical_analizer : public deterministic_finite_automaton{
         int col;
         std::vector<std::string> reserved_words;
 
-        lexical_analizer(std::vector<state> states, std::string file_delta, state* initial_state, std::string str, std::string reserved_words_path);
+        lexical_analizer(std::string states_file, std::string file_delta, std::string str, std::string reserved_words_path);
         token next_token();
         bool has_token();
         bool is_reserved_word(std::string word);

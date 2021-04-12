@@ -1,11 +1,11 @@
 #include <iostream>
 #include "lexical_analizer.h"
 
-lexical_analizer::lexical_analizer(std::vector<state> states, std::string file_delta, state* initial_state, std::string str, std::string reserved_words_path)
-:deterministic_finite_automaton(states, file_delta, initial_state, str)
+lexical_analizer::lexical_analizer(std::string states_file, std::string file_delta, std::string str, std::string reserved_words_path)
+:deterministic_finite_automaton(states_file, file_delta, str)
 {
     std::ifstream reserved_words_file;
-    reserved_words_file.open("src/reserved_words.in");
+    reserved_words_file.open(reserved_words_path.c_str());
     while(!reserved_words_file.eof()){
         std::string s;
         reserved_words_file >> s;
@@ -44,6 +44,7 @@ token lexical_analizer::next_token(){
             this->col = 1;
         }
         pointer++;
+           
     }
     int state = this->current_state->identifier;
     this->col--;
