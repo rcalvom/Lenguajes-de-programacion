@@ -71,7 +71,11 @@ grammar::grammar(std::string rules_path){
         }
     }
 
-    
+    for(std::set<std::string>::iterator it = this->terminal_symbols.begin(); it != this->terminal_symbols.end(); it++){
+        this->firsts[*it].insert(*it);
+    }
+
+
     /*for(std::set<std::string>::iterator it = this->non_terminal_symbols.begin(); it != this->non_terminal_symbols.end(); it++){
         std::set<std::string> first = this->firsts[*it];
         std::cout << *it << " = { ";
@@ -79,9 +83,80 @@ grammar::grammar(std::string rules_path){
             std::cout << *itt << " ";
         }
         std::cout << "}" << std::endl;
-    }    */
+    }
+
+    for(std::set<std::string>::iterator it = this->terminal_symbols.begin(); it != this->terminal_symbols.end(); it++){
+        std::set<std::string> first = this->firsts[*it];
+        std::cout << *it << " = { ";
+        for(std::set<std::string>::iterator itt = first.begin(); itt != first.end(); itt++){
+            std::cout << *itt << " ";
+        }
+        std::cout << "}" << std::endl;
+    }*/
 
     // Generación de conjunto de Siguientes.
+
+    for(int i = 0; i < this->rules.size(); i++){  // Para cada regla.
+        if(i == 0){ // Si es el simbolo inicial de la gramática se inserta EOF
+            this->nexts[this->rules[i].value].insert("$");
+        }
+        for(int j = 0; j < this->rules[i].production.size(); j++){          // Para cada simbolo en la producción de una regla
+            if(this->non_terminal_symbols.end() != this->non_terminal_symbols.find(this->rules[i].production[j])){ // Si el simbolo es no terminal.
+                if(j == this->rules[i].production.size() - 1){
+                    for(std::set<std::string>::iterator it = this->nexts[this->rules[i].value].begin(); it != this->nexts[this->rules[i].value].end(); it++){
+                        this->nexts[this->rules[i].production[j]].insert(*it); // Se añade los primeros del siguiente simbolo.
+                    }
+                }else {
+                    for(std::set<std::string>::iterator it = this->firsts[this->rules[i].production[j + 1]].begin(); it != this->firsts[this->rules[i].production[j + 1]].end(); it++){
+                        if(*it != ""){
+                            this->nexts[this->rules[i].production[j]].insert(*it); // Se añade los primeros del siguiente simbolo.
+                        }
+                    }
+                    if(this->firsts[this->rules[i].production[j + 1]].end() != this->firsts[this->rules[i].production[j + 1]].find("")){
+                        for(std::set<std::string>::iterator it = this->nexts[this->rules[i].value].begin(); it != this->nexts[this->rules[i].value].end(); it++){
+                            this->nexts[this->rules[i].production[j]].insert(*it); // Se añade los primeros del siguiente simbolo.
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    for(int i = this->rules.size() - 1; i >= 0; i--){  // Para cada regla.
+        if(i == 0){ // Si es el simbolo inicial de la gramática se inserta EOF
+            this->nexts[this->rules[i].value].insert("$");
+        }
+        for(int j = 0; j < this->rules[i].production.size(); j++){          // Para cada simbolo en la producción de una regla
+            if(this->non_terminal_symbols.end() != this->non_terminal_symbols.find(this->rules[i].production[j])){ // Si el simbolo es no terminal.
+                if(j == this->rules[i].production.size() - 1){
+                    for(std::set<std::string>::iterator it = this->nexts[this->rules[i].value].begin(); it != this->nexts[this->rules[i].value].end(); it++){
+                        this->nexts[this->rules[i].production[j]].insert(*it); // Se añade los primeros del siguiente simbolo.
+                    }
+                }else {
+                    for(std::set<std::string>::iterator it = this->firsts[this->rules[i].production[j + 1]].begin(); it != this->firsts[this->rules[i].production[j + 1]].end(); it++){
+                        if(*it != ""){
+                            this->nexts[this->rules[i].production[j]].insert(*it); // Se añade los primeros del siguiente simbolo.
+                        }
+                    }
+                    if(this->firsts[this->rules[i].production[j + 1]].end() != this->firsts[this->rules[i].production[j + 1]].find("")){
+                        for(std::set<std::string>::iterator it = this->nexts[this->rules[i].value].begin(); it != this->nexts[this->rules[i].value].end(); it++){
+                            this->nexts[this->rules[i].production[j]].insert(*it); // Se añade los primeros del siguiente simbolo.
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    for(std::set<std::string>::iterator it = this->non_terminal_symbols.begin(); it != this->non_terminal_symbols.end(); it++){
+        std::set<std::string> next = this->nexts[*it];
+        std::cout << *it << " = { ";
+        for(std::set<std::string>::iterator itt = next.begin(); itt != next.end(); itt++){
+            std::cout << *itt << " ";
+        }
+        std::cout << "}" << std::endl;
+    }
+
 
     // Generación de conjunto de predicción.
     
