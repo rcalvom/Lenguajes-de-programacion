@@ -7,5 +7,6 @@ class production_rule{
         std::vector<std::string> production;
 
         production_rule(std::string value, std::vector<std::string> production);
+        bool operator < (const production_rule &product_rule) const;
 
 };

@@ -1,0 +1,39 @@
+g++ -ISyntactic_Analyzer/libs/deterministic_finite_automaton -ISyntactic_Analyzer/libs/grammar -ISyntactic_Analyzer/libs/lexical_analyzer -ISyntactic_Analyzer/libs/syntactic_Analyzer Syntactic_Analyzer/libs/grammar/grammar.cpp Syntactic_Analyzer/libs/grammar/production_rule.cpp Syntactic_Analyzer/test/test.cpp -o Syntactic_Analyzer/build/test
+PRIMEROS
+
+A = {  cinco cuatro seis tres }
+B = {  cuatro seis }
+C = {  cinco }
+D = {  seis }
+S = { cinco cuatro seis tres uno }
+Siguientes
+
+A = { tres uno }
+B = { $ cinco dos seis tres uno }
+C = { $ dos seis tres uno }
+D = { $ cuatro dos seis tres uno }
+S = { $ dos }
+PREDICCIÓN
+
+S --> A uno B C  = 
+{  cinco cuatro seis tres }
+S --> S dos  = 
+{ cinco cuatro seis tres uno }
+A --> B C D  = 
+{ cuatro seis tres uno }
+A --> A tres  = 
+{ cinco cuatro seis tres uno }
+A -->  = 
+{ tres uno }
+B --> D cuatro C tres  = 
+{ $ cinco dos seis tres uno }
+B -->  = 
+{ $ cinco dos seis tres uno }
+C --> cinco D B  = 
+{ $ cinco dos seis tres uno }
+C -->  = 
+{ $ dos seis tres uno }
+D --> seis  = 
+{ $ cuatro dos seis tres uno }
+D -->   = 
+{ $ cuatro dos seis tres uno }
