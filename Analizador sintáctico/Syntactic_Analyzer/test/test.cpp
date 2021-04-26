@@ -4,10 +4,9 @@
 using namespace std;
 
 int main(){
-    
     grammar g("Syntactic_Analyzer/test/rules.in");
 
-    //cout << g.to_string() << endl;
+    cout << g.to_string() << endl;
     
     return 0;
 }
