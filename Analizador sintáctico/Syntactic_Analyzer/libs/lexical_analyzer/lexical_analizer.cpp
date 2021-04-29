@@ -11,8 +11,8 @@ lexical_analizer::lexical_analizer(std::string states_file, std::string file_del
         reserved_words_file >> s;
         this->reserved_words.push_back(s);
     }
-    /*for(int i = 0; i< this->reseved_words.size(); i++){
-        std::cout << this->reseved_words[i] << std::endl;
+    /*for(int i = 0; i< this->reserved_words.size(); i++){
+        std::cout << this->reserved_words[i] << std::endl;
     }*/
     this->row = 1;
     this->col = 1;

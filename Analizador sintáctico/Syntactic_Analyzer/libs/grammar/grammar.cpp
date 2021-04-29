@@ -24,6 +24,9 @@ grammar::grammar(std::string rules_path){
         this->rules.push_back(production_rule(left, production));         
     }
 
+    //Asignacion del simbolo inicial.
+    this->initial_symbol = this->rules[0].value;
+
     // Calculo de simbolos NO Terminales
     for(int i = 0; i < this->rules.size(); i++){
         this->non_terminal_symbols.insert(this->rules[i].value);

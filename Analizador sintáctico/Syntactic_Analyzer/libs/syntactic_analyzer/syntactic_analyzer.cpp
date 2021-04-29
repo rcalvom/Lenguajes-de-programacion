@@ -1,5 +1,6 @@
 #include <iostream>
 #include "syntactic_analyzer.h"
+#include "syntactic_error.h"
 
 syntactic_analyzer::syntactic_analyzer(lexical_analizer &lex, std::string rules_path) :
 grammar(rules_path), lexer(lex)
@@ -24,40 +25,49 @@ grammar(rules_path), lexer(lex)
         this->prediction[this->rules[i]] = this->calculate_prediction(this->rules[i]);
     }
 
-    std::cout << "\nPRIMEROS" << std::endl << std::endl;
+}
+
+void syntactic_analyzer::analyze(){
+    this->t = this->lexer.next_token();
+    this->evaluate(this->initial_symbol);
+    /*if(this->t.str != "$"){
+        throw(syntactic_error("a", 0, 0));
+    }*/
+}
+
+void syntactic_analyzer::evaluate(std::string a){
+    std::vector<production_rule> rules;
     for(int i = 0; i < this->rules.size(); i++){
-        std::cout << this->rules[i].value << " = { ";
-        for(std::set<std::string>::iterator it = this->first[this->rules[i]].begin(); it!= this->first[this->rules[i]].end(); it++){
-            std::cout << (*it) << " ";
+        if(this->rules[i].value == a){
+            rules.push_back(this->rules[i]);
         }
-        std::cout << "}" << std::endl;
     }
-    std::cout << std::endl;
-
-    std::cout << "\nSIGUIENTES" << std::endl << std::endl;
-    for(std::set<std::string>::iterator it = this->non_terminal_symbols.begin(); it != this->non_terminal_symbols.end(); it++){
-        std::set<std::string> next = this->follow[*it];
-        std::cout << *it << " = { ";
-        for(std::set<std::string>::iterator itt = next.begin(); itt != next.end(); itt++){
-            std::cout << *itt << " ";
+    for(int i = 0; i < rules.size(); i++){
+        for(std::set<std::string>::iterator it = this->prediction[rules[i]].begin(); it != this->prediction[rules[i]].end(); it++){
+            if(this->t.str == *it){
+                for(int j = 0; j < rules[i].production.size(); j++){
+                    if(this->is_non_terminal(rules[i].production[j])){
+                        this->evaluate(rules[i].production[j]);
+                    }else{
+                        this->match(rules[i].production[j]);
+                    }
+                }
+                return;
+            }
         }
-        std::cout << "}" << std::endl;
     }
-    std::cout << std::endl;   
+    //throw(syntactic_error("a", 0 , 0));
+}
 
-    std::cout << "\nPREDICCIÓN" << std::endl << std::endl;
-    for(int i = 0; i < this->rules.size(); i++){
-        std::cout << this->rules[i].value << " --> ";
-        for(int j = 0; j < this->rules[i].production.size(); j++){
-            std::cout << this->rules[i].production[j] << " ";
-        }
-        std::cout << " = \n{ ";
-        for(std::set<std::string>::iterator it = this->prediction[this->rules[i]].begin(); it != this->prediction[this->rules[i]].end(); it++){
-            std::cout << *it << " ";
-        }
-        std::cout << "}" << std::endl;
+void syntactic_analyzer::match(std::string t){
+    if(t == ""){
+        return;
     }
-
+    /*if(this->t.str == t){
+        this->t = this->lexer.next_token();
+    }else{*/
+    //    throw(syntactic_error("a", 0 ,0));
+    //}
 }
 
 std::set<std::string> syntactic_analyzer::calculate_first(std::vector<std::string> a){
@@ -139,4 +149,42 @@ std::set<std::string> syntactic_analyzer::calculate_prediction(production_rule a
         result = this->first[a];
     }
     return result;
+}
+
+std::string syntactic_analyzer::to_string(){
+    std::string s = grammar::to_string();
+    s = s + "\nPRIMEROS\n\n";
+    for(int i = 0; i < this->rules.size(); i++){
+        s = s + this->rules[i].value + " = { ";
+        for(std::set<std::string>::iterator it = this->first[this->rules[i]].begin(); it!= this->first[this->rules[i]].end(); it++){
+            s = s + (*it) + " ";
+        }
+        s = s + "}\n";
+    }
+    s = s + "\n";
+
+    s = s + "\nSIGUIENTES\n\n";
+    for(std::set<std::string>::iterator it = this->non_terminal_symbols.begin(); it != this->non_terminal_symbols.end(); it++){
+        std::set<std::string> next = this->follow[*it];
+        s = s + *it + " = { ";
+        for(std::set<std::string>::iterator itt = next.begin(); itt != next.end(); itt++){
+            s = s + *itt + " ";
+        }
+        s = s + "}\n";
+    }
+    s = s + "\n";   
+
+    s = s + "\nPREDICCIÓN\n\n";
+    for(int i = 0; i < this->rules.size(); i++){
+        s = s + this->rules[i].value + " -> ";
+        for(int j = 0; j < this->rules[i].production.size(); j++){
+            s = s + this->rules[i].production[j] + " ";
+        }
+        s = s + " = \n{ ";
+        for(std::set<std::string>::iterator it = this->prediction[this->rules[i]].begin(); it != this->prediction[this->rules[i]].end(); it++){
+            s = s + *it + " ";
+        }
+        s = s + "}\n";
+    }
+    return s;
 }

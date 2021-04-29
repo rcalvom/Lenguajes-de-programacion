@@ -9,6 +9,7 @@ class grammar{
         std::vector<production_rule> rules;
         std::set<std::string> non_terminal_symbols;
         std::set<std::string> terminal_symbols;
+        std::string initial_symbol;
 
     public:
         grammar(std::string rules_path);

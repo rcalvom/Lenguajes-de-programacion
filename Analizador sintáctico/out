@@ -1,4 +1,3 @@
-g++ -ISyntactic_Analyzer/libs/deterministic_finite_automaton -ISyntactic_Analyzer/libs/grammar -ISyntactic_Analyzer/libs/lexical_analyzer -ISyntactic_Analyzer/libs/syntactic_Analyzer Syntactic_Analyzer/libs/grammar/grammar.cpp Syntactic_Analyzer/libs/grammar/production_rule.cpp Syntactic_Analyzer/test/test.cpp -o Syntactic_Analyzer/build/test
 S	-->	Global	Main	Global	$	
 Global	-->	estructura	token_identificador	Sentencia_Estructura	fin_estructura	Global		
 Global	-->	funcion	Tipo	token_identificador	(	Param_Funcion	)	hacer	Sentencia	fin_funcion	Global		
@@ -85,4 +84,304 @@ Tipo	-->	token_identificador
 Identificador	-->	token_identificador	Identificador’	
 Identificador’	-->	.	token_identificador	Identificador’	
 Identificador’	-->		
+
+PRIMEROS
+
+S = { booleano cadena caracter entero estructura funcion funcion_principal real token_identificador }
+Global = { estructura }
+Global = { funcion }
+Global = { booleano cadena caracter entero real token_identificador }
+Global = {  }
+Main = { funcion_principal }
+Sentencia_Estructura = { booleano cadena caracter entero real token_identificador }
+Sentencia_Estructura = {  }
+Sentencia = { seleccionar si }
+Sentencia = { hacer mientras para }
+Sentencia = { token_identificador }
+Sentencia = { leer }
+Sentencia = { imprimir }
+Sentencia = { booleano cadena caracter entero real token_identificador }
+Sentencia = { token_identificador }
+Sentencia = { romper }
+Sentencia = { Retornar }
+Sentencia = {  }
+Condicional = { si }
+Si_No = { si_no }
+Si_No = {  }
+Condicional = { seleccionar }
+Caso = { caso }
+Caso = { defecto }
+Caso = {  }
+Ciclo = { para }
+Ciclo = { hacer }
+Ciclo = { mientras }
+Llamado_Funcion = { token_identificador }
+Leer = { leer }
+Imprimir = { imprimir }
+Imprimir’ = { ! ( + - falso token_cadena token_caracter token_entero token_identificador token_real verdadero }
+Imprimir’’ = { , }
+Imprimir’’ = {  }
+Declaracion = { booleano cadena caracter entero real token_identificador }
+Declaracion’ = {  , }
+Declaracion’ = { = }
+Declaracion’’ = { , }
+Declaracion’’ = {  }
+Asignacion = { token_identificador }
+Retorno = { retornar }
+Romper = { romper }
+Param_Funcion = { booleano cadena caracter entero real token_identificador }
+Param_Funcion’ = { , }
+Param_Funcion’ = {  }
+Parametro = { token_identificador }
+Parametro’ = { , }
+Parametro’ = {  }
+Valor = { token_real }
+Valor = { token_entero }
+Valor = { falso }
+Valor = { verdadero }
+Valor = { token_cadena }
+Valor = { token_caracter }
+Valor = { token_identificador }
+Valor = { token_identificador }
+Valor = { ( }
+Valor = { ! + - }
+Valor = { ! ( + - falso token_cadena token_caracter token_entero token_identificador token_real verdadero }
+Valor’ = { != % && * + - / < <= == > >= || }
+Valor’ = {  }
+Operador_binario = { + }
+Operador_binario = { - }
+Operador_binario = { * }
+Operador_binario = { / }
+Operador_binario = { % }
+Operador_binario = { && }
+Operador_binario = { || }
+Operador_binario = { > }
+Operador_binario = { >= }
+Operador_binario = { < }
+Operador_binario = { <= }
+Operador_binario = { == }
+Operador_binario = { != }
+Operador_unitario = { + }
+Operador_unitario = { - }
+Operador_unitario = { ! }
+Tipo = { entero }
+Tipo = { real }
+Tipo = { booleano }
+Tipo = { cadena }
+Tipo = { caracter }
+Tipo = { token_identificador }
+Identificador = { token_identificador }
+Identificador’ = { . }
+Identificador’ = {  }
+
+
+SIGUIENTES
+
+Asignacion = { Retornar booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer imprimir leer mientras para real romper seleccionar si si_no token_identificador }
+Caso = { fin_seleccionar }
+Ciclo = { Retornar booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer imprimir leer mientras para real romper seleccionar si si_no token_identificador }
+Condicional = { Retornar booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer imprimir leer mientras para real romper seleccionar si si_no token_identificador }
+Declaracion = { $ Retornar booleano cadena caracter caso defecto entero estructura fin_estructura fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si funcion funcion_principal hacer imprimir leer mientras para real romper seleccionar si si_no token_identificador }
+Declaracion’ = { ; }
+Declaracion’’ = { ; }
+Global = { $ funcion_principal }
+Identificador = { ) , = }
+Identificador’ = { ) , = }
+Imprimir = { Retornar booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer imprimir leer mientras para real romper seleccionar si si_no token_identificador }
+Imprimir’ = { ) }
+Imprimir’’ = { ) }
+Leer = { Retornar booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer imprimir leer mientras para real romper seleccionar si si_no token_identificador }
+Llamado_Funcion = { != % && ) * + , - / : ; < <= == > >= Retornar booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer imprimir leer mientras para real romper seleccionar si si_no token_identificador || }
+Main = { $ booleano cadena caracter entero estructura funcion real token_identificador }
+Operador_binario = { ! ( + - falso token_cadena token_caracter token_entero token_identificador token_real verdadero }
+Operador_unitario = { ! ( + - falso token_cadena token_caracter token_entero token_identificador token_real verdadero }
+Param_Funcion = { ) }
+Param_Funcion’ = { ) }
+Parametro = { ) }
+Parametro’ = { ) }
+Retorno = { }
+Romper = { Retornar booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer imprimir leer mientras para real romper seleccionar si si_no token_identificador }
+S = { $ }
+Sentencia = { caso defecto fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si mientras si_no }
+Sentencia_Estructura = { fin_estructura }
+Si_No = { fin_si }
+Tipo = { identificador token_identificador }
+Valor = { != % && ) * + , - / : ; < <= == > >= || }
+Valor’ = { != % && ) * + , - / : ; < <= == > >= || }
+
+
+PREDICCIÓN
+
+S -> Global Main Global $  = 
+{ booleano cadena caracter entero estructura funcion funcion_principal real token_identificador }
+Global -> estructura token_identificador Sentencia_Estructura fin_estructura Global   = 
+{ estructura }
+Global -> funcion Tipo token_identificador ( Param_Funcion ) hacer Sentencia fin_funcion Global   = 
+{ funcion }
+Global -> Declaracion Global   = 
+{ booleano cadena caracter entero real token_identificador }
+Global ->   = 
+{ $ funcion_principal }
+Main -> funcion_principal Sentencia fin_principal  = 
+{ funcion_principal }
+Sentencia_Estructura -> Declaracion Sentencia_Estructura  = 
+{ booleano cadena caracter entero real token_identificador }
+Sentencia_Estructura ->   = 
+{ fin_estructura }
+Sentencia -> Condicional Sentencia   = 
+{ seleccionar si }
+Sentencia -> Ciclo Sentencia   = 
+{ hacer mientras para }
+Sentencia -> Llamado_Funcion Sentencia   = 
+{ token_identificador }
+Sentencia -> Leer Sentencia   = 
+{ leer }
+Sentencia -> Imprimir Sentencia   = 
+{ imprimir }
+Sentencia -> Declaracion Sentencia   = 
+{ booleano cadena caracter entero real token_identificador }
+Sentencia -> Asignacion Sentencia   = 
+{ token_identificador }
+Sentencia -> Romper Sentencia  = 
+{ romper }
+Sentencia -> Retornar Sentencia  = 
+{ Retornar }
+Sentencia ->   = 
+{ caso defecto fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si mientras si_no }
+Condicional -> si ( Valor ) entonces Sentencia Si_No fin_si  = 
+{ si }
+Si_No -> si_no Sentencia  = 
+{ si_no }
+Si_No ->   = 
+{ fin_si }
+Condicional -> seleccionar ( Identificador ) entre Caso fin_seleccionar  = 
+{ seleccionar }
+Caso -> caso Valor : Sentencia Caso  = 
+{ caso }
+Caso -> defecto : Sentencia Caso  = 
+{ defecto }
+Caso ->   = 
+{ fin_seleccionar }
+Ciclo -> para ( Tipo identificador = Valor ; Valor ; Valor ) hacer Sentencia fin_para  = 
+{ para }
+Ciclo -> hacer Sentencia mientras ( Valor ) ;  = 
+{ hacer }
+Ciclo -> mientras ( Valor ) hacer Sentencia fin_mientras  = 
+{ mientras }
+Llamado_Funcion -> token_identificador ( Parametro ) ;  = 
+{ token_identificador }
+Leer -> leer ( Identificador ) ;  = 
+{ leer }
+Imprimir -> imprimir ( Imprimir’ ) ;   = 
+{ imprimir }
+Imprimir’ -> Valor Imprimir’’  = 
+{ ! ( + - falso token_cadena token_caracter token_entero token_identificador token_real verdadero }
+Imprimir’’ -> , Valor Imprimir’’  = 
+{ , }
+Imprimir’’ ->   = 
+{ ) }
+Declaracion -> Tipo token_identificador Declaracion’ ;  = 
+{ booleano cadena caracter entero real token_identificador }
+Declaracion’ -> Declaracion’’   = 
+{ , ; }
+Declaracion’ -> = Valor Declaracion’’   = 
+{ = }
+Declaracion’’ -> , token_identificador Declaración’  = 
+{ , }
+Declaracion’’ ->   = 
+{ ; }
+Asignacion -> Identificador = Valor ;   = 
+{ token_identificador }
+Retorno -> retornar Valor ;  = 
+{ retornar }
+Romper -> romper ;   = 
+{ romper }
+Param_Funcion -> Tipo token_identificador Param_Funcion’  = 
+{ booleano cadena caracter entero real token_identificador }
+Param_Funcion’ -> , Tipo token_identificador Param_Funcion’  = 
+{ , }
+Param_Funcion’ ->   = 
+{ ) }
+Parametro -> Identificador Parametro’  = 
+{ token_identificador }
+Parametro’ -> , Identificador Parametro’   = 
+{ , }
+Parametro’ ->   = 
+{ ) }
+Valor -> token_real Valor’  = 
+{ token_real }
+Valor -> token_entero Valor’  = 
+{ token_entero }
+Valor -> falso Valor’  = 
+{ falso }
+Valor -> verdadero Valor’  = 
+{ verdadero }
+Valor -> token_cadena Valor’  = 
+{ token_cadena }
+Valor -> token_caracter Valor’  = 
+{ token_caracter }
+Valor -> token_identificador Valor’  = 
+{ token_identificador }
+Valor -> Llamado_Funcion Valor’  = 
+{ token_identificador }
+Valor -> ( Valor ) Valor’  = 
+{ ( }
+Valor -> Operador_unitario Valor Valor’  = 
+{ ! + - }
+Valor -> Valor Operador_binario Valor   = 
+{ ! ( + - falso token_cadena token_caracter token_entero token_identificador token_real verdadero }
+Valor’ -> Operador_binario Valor Valor’  = 
+{ != % && * + - / < <= == > >= || }
+Valor’ ->   = 
+{ != % && ) * + , - / : ; < <= == > >= || }
+Operador_binario -> +  = 
+{ + }
+Operador_binario -> -  = 
+{ - }
+Operador_binario -> *  = 
+{ * }
+Operador_binario -> /  = 
+{ / }
+Operador_binario -> %  = 
+{ % }
+Operador_binario -> &&  = 
+{ && }
+Operador_binario -> ||  = 
+{ || }
+Operador_binario -> >  = 
+{ > }
+Operador_binario -> >=  = 
+{ >= }
+Operador_binario -> <  = 
+{ < }
+Operador_binario -> <=  = 
+{ <= }
+Operador_binario -> ==  = 
+{ == }
+Operador_binario -> !=  = 
+{ != }
+Operador_unitario -> +  = 
+{ + }
+Operador_unitario -> -  = 
+{ - }
+Operador_unitario -> !  = 
+{ ! }
+Tipo -> entero   = 
+{ entero }
+Tipo -> real  = 
+{ real }
+Tipo -> booleano  = 
+{ booleano }
+Tipo -> cadena  = 
+{ cadena }
+Tipo -> caracter  = 
+{ caracter }
+Tipo -> token_identificador  = 
+{ token_identificador }
+Identificador -> token_identificador Identificador’  = 
+{ token_identificador }
+Identificador’ -> . token_identificador Identificador’  = 
+{ . }
+Identificador’ ->   = 
+{ ) , = }
 
