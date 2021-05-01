@@ -1,6 +1,6 @@
 #include <iostream>
 #include "syntactic_analyzer.h"
-#include "syntactic_error.h"
+#include "../../src/syntactic_error.h"
 
 syntactic_analyzer::syntactic_analyzer(lexical_analizer &lex, std::string rules_path) :
 grammar(rules_path), lexer(lex)
@@ -28,23 +28,29 @@ grammar(rules_path), lexer(lex)
 }
 
 void syntactic_analyzer::analyze(){
-    this->t = this->lexer.next_token();
+    do{
+        this->t = this->lexer.next_token();
+    }while(this->t.type == "comment");
     this->evaluate(this->initial_symbol);
-    /*if(this->t.str != "$"){
-        throw(syntactic_error("a", 0, 0));
-    }*/
+    if(this->t.type != "EOF"){
+        std::set<std::string> result;
+        result.insert("EOF");
+        throw(syntactic_error("Error Sintáctico", this->t.row, this->t.col, this->t.str, result));
+    }
 }
 
 void syntactic_analyzer::evaluate(std::string a){
+    //std::cout << "Evaluar -> No terminal: "<< a << "; Token: " << this->t.type << std::endl;
     std::vector<production_rule> rules;
     for(int i = 0; i < this->rules.size(); i++){
         if(this->rules[i].value == a){
             rules.push_back(this->rules[i]);
         }
+
     }
     for(int i = 0; i < rules.size(); i++){
         for(std::set<std::string>::iterator it = this->prediction[rules[i]].begin(); it != this->prediction[rules[i]].end(); it++){
-            if(this->t.str == *it){
+            if(this->t.type == *it){
                 for(int j = 0; j < rules[i].production.size(); j++){
                     if(this->is_non_terminal(rules[i].production[j])){
                         this->evaluate(rules[i].production[j]);
@@ -56,18 +62,27 @@ void syntactic_analyzer::evaluate(std::string a){
             }
         }
     }
-    //throw(syntactic_error("a", 0 , 0));
+    std::set<std::string> result;
+    for(int i = 0; i < rules.size(); i++){
+        result.insert(this->prediction[rules[i]].begin(), this->prediction[rules[i]].end());
+    }
+    throw(syntactic_error("Error Sintactico", this->t.row, this->t.col, this->t.str, result));
 }
 
 void syntactic_analyzer::match(std::string t){
+    //std::cout << "Emparejar -> terminal: "<< t << "; Token: " << this->t.type << std::endl;
     if(t == ""){
         return;
     }
-    /*if(this->t.str == t){
-        this->t = this->lexer.next_token();
-    }else{*/
-    //    throw(syntactic_error("a", 0 ,0));
-    //}
+    if(this->t.type == t){
+        do{
+            this->t = this->lexer.has_token() ? this->lexer.next_token() : token("EOF", "EOF", -1, this->lexer.row, this->lexer.col);  
+        }while(this->t.type == "comment");
+    }else{
+        std::set<std::string> result;
+        result.insert(t);
+        throw(syntactic_error("Error Sintáctico", this->t.row, this->t.col, this->t.str, result));
+    }
 }
 
 std::set<std::string> syntactic_analyzer::calculate_first(std::vector<std::string> a){
@@ -114,7 +129,7 @@ std::set<std::string> syntactic_analyzer::calculate_first(std::string a){
 void syntactic_analyzer::calculate_follow(){
     for(int i = 0; i < this->rules.size(); i++){  
         if(i == 0){
-            this->follow[this->rules[i].value].insert("$");
+            this->follow[this->rules[i].value].insert("EOF");
         }
         for(int j = 0; j < this->rules[i].production.size(); j++){
             if(this->is_non_terminal(this->rules[i].production[j])){

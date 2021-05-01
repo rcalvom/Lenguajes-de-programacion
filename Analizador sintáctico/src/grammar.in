@@ -1,0 +1,168 @@
+S Global Main Global EOF
+Global estructura id Sentencia_Estructura fin_estructura Global 
+Global funcion Tipo id tk_par_izq Param_Funcion tk_par_der hacer Sentencia_Funcion Retorno fin_funcion Global 
+Global 
+Main funcion_principal Sentencia_Principal fin_principal
+Declaracion_Asignacion_E tk_asig Valor Declaracion_Asignacion_E’
+Declaracion_Asignacion_E Declaracion_Asignacion_E’
+Declaracion_Asignacion_E’ tk_coma id Declaracion_Asignacion_E
+Declaracion_Asignacion_E’ 
+Declaracion Tipo id Declaracion’ tk_pyc
+Declaracion’ Declaracion’’ 
+Declaracion’ tk_asig Valor Declaracion’’ 
+Declaracion’’ tk_coma id Declaracion’
+Declaracion’’
+Sentencia_Estructura Tipo id Declaracion_Asignacion_E tk_pyc Sentencia_Estructura
+Sentencia_Estructura Identificador id Declaracion_Asignacion_E tk_pyc Sentencia_Estructura 
+Sentencia_Estructura 
+Sentencia_Principal Condicional Sentencia_Principal 
+Sentencia_Principal Ciclo Sentencia_Principal 
+Sentencia_Principal Leer Sentencia_Principal 
+Sentencia_Principal Imprimir Sentencia_Principal 
+Sentencia_Principal Romper Sentencia_Principal
+Sentencia_Principal Identificador Sentencia_Principal_id
+Sentencia_Principal Declaracion Sentencia_Principal
+Sentencia_Principal 
+Sentencia_Principal_id tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Principal 
+Sentencia_Principal_id tk_asig Valor tk_pyc Sentencia_Principal
+Sentencia_Principal_id id tk_pyc Sentencia_Principal
+Sentencia_Si Condicional Sentencia_Si 
+Sentencia_Si Ciclo Sentencia_Si 
+Sentencia_Si Leer Sentencia_Si 
+Sentencia_Si Imprimir Sentencia_Si 
+Sentencia_Si Romper Sentencia_Si
+Sentencia_Si Identificador Sentencia_Si_id
+Sentencia_Si Declaracion Sentencia_Si 
+Sentencia_Si 
+Sentencia_Si_id tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Si
+Sentencia_Si_id tk_asig Valor tk_pyc Sentencia_Si
+Sentencia_Si_id id tk_pyc Sentencia_Si
+Sentencia_Mientras Condicional Sentencia_Mientras 
+Sentencia_Mientras Ciclo Sentencia_Mientras 
+Sentencia_Mientras Leer Sentencia_Mientras 
+Sentencia_Mientras Imprimir Sentencia_Mientras 
+Sentencia_Mientras Romper Sentencia_Mientras
+Sentencia_Mientras Identificador Sentencia_Mientras_id
+Sentencia_Mientras Declaracion Sentencia_Mientras 
+Sentencia_Mientras 
+Sentencia_Mientras_id tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Mientras
+Sentencia_Mientras_id tk_asig Valor tk_pyc Sentencia_Mientras
+Sentencia_Mientras_id id tk_pyc Sentencia_Mientras
+Sentencia_HMientras Condicional Sentencia_HMientras 
+Sentencia_HMientras Ciclo Sentencia_HMientras 
+Sentencia_HMientras Leer Sentencia_HMientras 
+Sentencia_HMientras Imprimir Sentencia_HMientras 
+Sentencia_HMientras Romper Sentencia_HMientras
+Sentencia_HMientras Identificador Sentencia_HMientras_id
+Sentencia_HMientras Declaracion Sentencia_HMientras 
+Sentencia_HMientras 
+Sentencia_HMientras_id tk_par_izq Parametro tk_par_der tk_pyc Sentencia_HMientras
+Sentencia_HMientras_id tk_asig Valor tk_pyc Sentencia_HMientras
+Sentencia_HMientras_id id tk_pyc Sentencia_HMientras
+Sentencia_Para Condicional Sentencia_Para 
+Sentencia_Para Ciclo Sentencia_Para 
+Sentencia_Para Leer Sentencia_Para 
+Sentencia_Para Imprimir Sentencia_Para 
+Sentencia_Para Romper Sentencia_Para
+Sentencia_Para Identificador Sentencia_Para_id
+Sentencia_Para Declaracion Sentencia_Para
+Sentencia_Para 
+Sentencia_Para_id tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Para
+Sentencia_Para_id tk_asig Valor tk_pyc Sentencia_Para
+Sentencia_Para_id id tk_pyc Sentencia_Para
+Sentencia_Seleccionar Condicional Sentencia_Seleccionar 
+Sentencia_Seleccionar Ciclo Sentencia_Seleccionar 
+Sentencia_Seleccionar Leer Sentencia_Seleccionar 
+Sentencia_Seleccionar Imprimir Sentencia_Seleccionar 
+Sentencia_Seleccionar Romper Sentencia_Seleccionar
+Sentencia_Seleccionar Identificador Sentencia_Seleccionar_id
+Sentencia_Seleccionar Declaracion Sentencia_Seleccionar 
+Sentencia_Seleccionar 
+Sentencia_Seleccionar_id tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Seleccionar
+Sentencia_Seleccionar_id tk_asig Valor tk_pyc Sentencia_Seleccionar
+Sentencia_Seleccionar_id id tk_pyc Sentencia_Seleccionar
+Sentencia_Funcion Condicional Sentencia_Funcion 
+Sentencia_Funcion Ciclo Sentencia_Funcion 
+Sentencia_Funcion Leer Sentencia_Funcion 
+Sentencia_Funcion Imprimir Sentencia_Funcion 
+Sentencia_Funcion Romper Sentencia_Funcion
+Sentencia_Funcion Declaracion Sentencia_Funcion 
+Sentencia_Funcion Identificador Sentencia_Funcion_id
+Sentencia_Funcion 
+Sentencia_Funcion_id tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Funcion
+Sentencia_Funcion_id tk_asig Valor tk_pyc Sentencia_Funcion
+Sentencia_Funcion_id id tk_pyc Sentencia_Funcion
+Condicional si tk_par_izq Valor tk_par_der entonces Sentencia_Si Si_No fin_si
+Si_No si_no Sentencia_Si
+Si_No 
+Condicional seleccionar tk_par_izq Identificador tk_par_der entre Caso fin_seleccionar
+Caso caso Valor tk_dosp Sentencia_Seleccionar Caso
+Caso defecto tk_dosp Sentencia_Seleccionar Caso
+Caso 
+Ciclo para tk_par_izq Declaracion_Para tk_pyc Valor tk_pyc Valor tk_par_der hacer Sentencia_Para fin_para
+Declaracion_Para Tipo id tk_asig Valor
+Declaracion_Para Identificador Declaracion_Para’ tk_asig Valor
+Declaracion_Para  
+Declaracion_Para’ id
+Declaracion_Para’ 
+Ciclo hacer Sentencia_HMientras mientras tk_par_izq Valor tk_par_der tk_pyc
+Ciclo mientras tk_par_izq Valor tk_par_der hacer Sentencia_Mientras fin_mientras
+Leer leer tk_par_izq Leer’ tk_par_der tk_pyc
+Leer’ id Leer’’
+Leer’’ tk_punto Leer’
+Leer’’
+Imprimir imprimir tk_par_izq Imprimir’ tk_par_der tk_pyc 
+Imprimir’ Valor Imprimir’’
+Imprimir’ Identificador Imprimir’’
+Imprimir’’ tk_coma Imprimir’ 
+Imprimir’’ 
+Retorno retornar Valor tk_pyc
+Romper romper tk_pyc 
+Param_Funcion Tipo id Param_Funcion’
+Param_Funcion Identificador id Param_Funcion’
+Param_Funcion’ tk_coma Tipo id Param_Funcion’
+Param_Funcion’ tk_coma Identificador id Param_Funcion’
+Param_Funcion’ 
+Parametro Valor Parametro’
+Parametro Identificador Parametro’
+Parametro 
+Parametro’ tk_coma Parametro’’
+Parametro’ 
+Parametro’’ Valor Parametro’
+Parametro’’ Identificador Parametro’
+Valor id Func Valor’
+Valor tk_real Valor’
+Valor tk_entero Valor’
+Valor falso Valor’
+Valor verdadero Valor’
+Valor tk_cadena Valor’
+Valor tk_caracter Valor’
+Valor tk_par_izq Valor tk_par_der Valor’
+Valor Operador_unitario Valor Valor’
+Valor’ Operador_binario Valor Valor’
+Valor’ 
+Func tk_par_izq Parametro tk_par_der
+Func 
+Operador_binario tk_mas
+Operador_binario tk_menos
+Operador_binario tk_mult
+Operador_binario tk_div
+Operador_binario tk_mod
+Operador_binario tk_y
+Operador_binario tk_o
+Operador_binario tk_mayor
+Operador_binario tk_mayor_igual
+Operador_binario tk_menor
+Operador_binario tk_menor_igual
+Operador_binario tk_igual
+Operador_binario tk_dif
+Operador_unitario tk_menos
+Operador_unitario tk_neg
+Tipo entero 
+Tipo real
+Tipo booleano
+Tipo cadena
+Tipo caracter
+Identificador id Identificador’
+Identificador’ tk_punto id Identificador’
+Identificador’ 

@@ -10,6 +10,7 @@ int main(){
     // Se crea el analizador sintáctico.
     syntactic_analyzer syntactic(lexical, "Syntactic_Analyzer/src/grammar.in");
 
+    cout << "hola" << endl;
     cout << syntactic.to_string() << endl;
     
     return 0;
