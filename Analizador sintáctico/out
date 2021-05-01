@@ -1,6 +1,8 @@
 S	-->	Global	Main	Global	EOF	
 Global	-->	estructura	id	Sentencia_Estructura	fin_estructura	Global		
-Global	-->	funcion	Tipo	id	tk_par_izq	Param_Funcion	tk_par_der	hacer	Sentencia_Funcion	fin_funcion	Global		
+Global	-->	funcion	Global’		
+Global’	-->	Tipo	id	tk_par_izq	Param_Funcion	tk_par_der	hacer	Sentencia_Funcion	Retorno	fin_funcion	Global		
+Global’	-->	Identificador	id	tk_par_izq	Param_Funcion	tk_par_der	hacer	Sentencia_Funcion	Retorno	fin_funcion	Global		
 Global	-->		
 Main	-->	funcion_principal	Sentencia_Principal	fin_principal	
 Declaracion_Asignacion_E	-->	tk_asig	Valor	Declaracion_Asignacion_E’	
@@ -37,7 +39,6 @@ Sentencia_Si	-->
 Sentencia_Si_id	-->	tk_par_izq	Parametro	tk_par_der	tk_pyc	Sentencia_Si	
 Sentencia_Si_id	-->	tk_asig	Valor	tk_pyc	Sentencia_Si	
 Sentencia_Si_id	-->	id	tk_pyc	Sentencia_Si	
-Sentencia	-->	en	condicional	mientras	
 Sentencia_Mientras	-->	Condicional	Sentencia_Mientras		
 Sentencia_Mientras	-->	Ciclo	Sentencia_Mientras		
 Sentencia_Mientras	-->	Leer	Sentencia_Mientras		
@@ -49,6 +50,21 @@ Sentencia_Mientras	-->
 Sentencia_Mientras_id	-->	tk_par_izq	Parametro	tk_par_der	tk_pyc	Sentencia_Mientras	
 Sentencia_Mientras_id	-->	tk_asig	Valor	tk_pyc	Sentencia_Mientras	
 Sentencia_Mientras_id	-->	id	tk_pyc	Sentencia_Mientras	
+Sentencia_HMientras	-->	Condicional	Sentencia_HMientras		
+Sentencia_HMientras	-->	CicloH	Sentencia_HMientras		
+Sentencia_HMientras	-->	Leer	Sentencia_HMientras		
+Sentencia_HMientras	-->	Imprimir	Sentencia_HMientras		
+Sentencia_HMientras	-->	Romper	Sentencia_HMientras	
+Sentencia_HMientras	-->	Identificador	Sentencia_HMientras_id	
+Sentencia_HMientras	-->	Declaracion	Sentencia_HMientras		
+Sentencia_HMientras	-->	mientras	tk_par_izq	Valor	tk_par_der	Sentencia_HMientras’		
+Sentencia_HMientras’	-->	tk_pyc	
+Sentencia_HMientras’	-->	hacer	Sentencia_Mientras	fin_mientras	Sentencia_HMientras	
+CicloH	-->	para	tk_par_izq	Declaracion_Para	tk_pyc	Valor	tk_pyc	Valor	tk_par_der	hacer	Sentencia_Para	fin_para	
+CicloH	-->	hacer	Sentencia_HMientras	mientras	tk_par_izq	Valor	tk_par_der	
+Sentencia_HMientras_id	-->	tk_par_izq	Parametro	tk_par_der	tk_pyc	Sentencia_HMientras	
+Sentencia_HMientras_id	-->	tk_asig	Valor	tk_pyc	Sentencia_HMientras	
+Sentencia_HMientras_id	-->	id	tk_pyc	Sentencia_HMientras	
 Sentencia_Para	-->	Condicional	Sentencia_Para		
 Sentencia_Para	-->	Ciclo	Sentencia_Para		
 Sentencia_Para	-->	Leer	Sentencia_Para		
@@ -76,7 +92,6 @@ Sentencia_Funcion	-->	Ciclo	Sentencia_Funcion
 Sentencia_Funcion	-->	Leer	Sentencia_Funcion		
 Sentencia_Funcion	-->	Imprimir	Sentencia_Funcion		
 Sentencia_Funcion	-->	Romper	Sentencia_Funcion	
-Sentencia_Funcion	-->	Retorno	Sentencia_Funcion	
 Sentencia_Funcion	-->	Declaracion	Sentencia_Funcion		
 Sentencia_Funcion	-->	Identificador	Sentencia_Funcion_id	
 Sentencia_Funcion	-->		
@@ -96,9 +111,12 @@ Declaracion_Para	-->	Identificador	Declaracion_Para’	tk_asig	Valor
 Declaracion_Para	-->		
 Declaracion_Para’	-->	id	
 Declaracion_Para’	-->		
-Ciclo	-->	hacer	Sentencia_Principal	mientras	tk_par_izq	Valor	tk_par_der	tk_pyc	
+Ciclo	-->	hacer	Sentencia_HMientras	
 Ciclo	-->	mientras	tk_par_izq	Valor	tk_par_der	hacer	Sentencia_Mientras	fin_mientras	
-Leer	-->	leer	tk_par_izq	Identificador	tk_par_der	tk_pyc	
+Leer	-->	leer	tk_par_izq	Leer’	tk_par_der	tk_pyc	
+Leer’	-->	id	Leer’’	
+Leer’’	-->	tk_punto	Leer’	
+Leer’’	-->	
 Imprimir	-->	imprimir	tk_par_izq	Imprimir’	tk_par_der	tk_pyc		
 Imprimir’	-->	Valor	Imprimir’’	
 Imprimir’	-->	Identificador	Imprimir’’	
@@ -108,6 +126,7 @@ Retorno	-->	retornar	Valor	tk_pyc
 Romper	-->	romper	tk_pyc		
 Param_Funcion	-->	Tipo	id	Param_Funcion’	
 Param_Funcion	-->	Identificador	id	Param_Funcion’	
+Param_Funcion	-->		
 Param_Funcion’	-->	tk_coma	Tipo	id	Param_Funcion’	
 Param_Funcion’	-->	tk_coma	Identificador	id	Param_Funcion’	
 Param_Funcion’	-->		
@@ -118,7 +137,7 @@ Parametro’	-->	tk_coma	Parametro’’
 Parametro’	-->		
 Parametro’’	-->	Valor	Parametro’	
 Parametro’’	-->	Identificador	Parametro’	
-Valor	-->	id	Func	Valor’	
+Valor	-->	Identificador	Func	Valor’	
 Valor	-->	tk_real	Valor’	
 Valor	-->	tk_entero	Valor’	
 Valor	-->	falso	Valor’	
@@ -160,6 +179,8 @@ PRIMEROS
 S = { estructura funcion funcion_principal }
 Global = { estructura }
 Global = { funcion }
+Global’ = { booleano cadena caracter entero real }
+Global’ = { id }
 Global = {  }
 Main = { funcion_principal }
 Declaracion_Asignacion_E = { tk_asig }
@@ -196,7 +217,6 @@ Sentencia_Si = {  }
 Sentencia_Si_id = { tk_par_izq }
 Sentencia_Si_id = { tk_asig }
 Sentencia_Si_id = { id }
-Sentencia = { en }
 Sentencia_Mientras = { seleccionar si }
 Sentencia_Mientras = { hacer mientras para }
 Sentencia_Mientras = { leer }
@@ -208,6 +228,21 @@ Sentencia_Mientras = {  }
 Sentencia_Mientras_id = { tk_par_izq }
 Sentencia_Mientras_id = { tk_asig }
 Sentencia_Mientras_id = { id }
+Sentencia_HMientras = { seleccionar si }
+Sentencia_HMientras = { hacer para }
+Sentencia_HMientras = { leer }
+Sentencia_HMientras = { imprimir }
+Sentencia_HMientras = { romper }
+Sentencia_HMientras = { id }
+Sentencia_HMientras = { booleano cadena caracter entero real }
+Sentencia_HMientras = { mientras }
+Sentencia_HMientras’ = { tk_pyc }
+Sentencia_HMientras’ = { hacer }
+CicloH = { para }
+CicloH = { hacer }
+Sentencia_HMientras_id = { tk_par_izq }
+Sentencia_HMientras_id = { tk_asig }
+Sentencia_HMientras_id = { id }
 Sentencia_Para = { seleccionar si }
 Sentencia_Para = { hacer mientras para }
 Sentencia_Para = { leer }
@@ -235,7 +270,6 @@ Sentencia_Funcion = { hacer mientras para }
 Sentencia_Funcion = { leer }
 Sentencia_Funcion = { imprimir }
 Sentencia_Funcion = { romper }
-Sentencia_Funcion = { retornar }
 Sentencia_Funcion = { booleano cadena caracter entero real }
 Sentencia_Funcion = { id }
 Sentencia_Funcion = {  }
@@ -258,6 +292,9 @@ Declaracion_Para’ = {  }
 Ciclo = { hacer }
 Ciclo = { mientras }
 Leer = { leer }
+Leer’ = { id }
+Leer’’ = { tk_punto }
+Leer’’ = {  }
 Imprimir = { imprimir }
 Imprimir’ = { falso id tk_cadena tk_caracter tk_entero tk_menos tk_neg tk_par_izq tk_real verdadero }
 Imprimir’ = { id }
@@ -267,6 +304,7 @@ Retorno = { retornar }
 Romper = { romper }
 Param_Funcion = { booleano cadena caracter entero real }
 Param_Funcion = { id }
+Param_Funcion = {  }
 Param_Funcion’ = { tk_coma }
 Param_Funcion’ = { tk_coma }
 Param_Funcion’ = {  }
@@ -318,9 +356,10 @@ Identificador’ = {  }
 SIGUIENTES
 
 Caso = { fin_seleccionar }
-Ciclo = { booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
-Condicional = { booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
-Declaracion = { booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
+Ciclo = { booleano cadena caracter caso defecto entero fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
+CicloH = { booleano cadena caracter entero hacer id imprimir leer mientras para real romper seleccionar si }
+Condicional = { booleano cadena caracter caso defecto entero fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
+Declaracion = { booleano cadena caracter caso defecto entero fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
 Declaracion_Asignacion_E = { tk_pyc }
 Declaracion_Asignacion_E’ = { tk_pyc }
 Declaracion_Para = { tk_pyc }
@@ -329,12 +368,15 @@ Declaracion’ = { tk_pyc }
 Declaracion’’ = { tk_pyc }
 Func = { tk_coma tk_dif tk_div tk_dosp tk_igual tk_mas tk_mayor tk_mayor_igual tk_menor tk_menor_igual tk_menos tk_mod tk_mult tk_o tk_par_der tk_pyc tk_y }
 Global = { EOF funcion_principal }
-Identificador = { id tk_asig tk_coma tk_par_der tk_par_izq }
-Identificador’ = { id tk_asig tk_coma tk_par_der tk_par_izq }
-Imprimir = { booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
+Global’ = { EOF funcion_principal }
+Identificador = { id tk_asig tk_coma tk_dif tk_div tk_dosp tk_igual tk_mas tk_mayor tk_mayor_igual tk_menor tk_menor_igual tk_menos tk_mod tk_mult tk_o tk_par_der tk_par_izq tk_pyc tk_y }
+Identificador’ = { id tk_asig tk_coma tk_dif tk_div tk_dosp tk_igual tk_mas tk_mayor tk_mayor_igual tk_menor tk_menor_igual tk_menos tk_mod tk_mult tk_o tk_par_der tk_par_izq tk_pyc tk_y }
+Imprimir = { booleano cadena caracter caso defecto entero fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
 Imprimir’ = { tk_par_der }
 Imprimir’’ = { tk_par_der }
-Leer = { booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
+Leer = { booleano cadena caracter caso defecto entero fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
+Leer’ = { tk_par_der }
+Leer’’ = { tk_par_der }
 Main = { EOF estructura funcion }
 Operador_binario = { falso id tk_cadena tk_caracter tk_entero tk_menos tk_neg tk_par_izq tk_real verdadero }
 Operador_unitario = { falso id tk_cadena tk_caracter tk_entero tk_menos tk_neg tk_par_izq tk_real verdadero }
@@ -343,19 +385,21 @@ Param_Funcion’ = { tk_par_der }
 Parametro = { tk_par_der }
 Parametro’ = { tk_par_der }
 Parametro’’ = { tk_par_der }
-Retorno = { booleano cadena caracter entero fin_funcion hacer id imprimir leer mientras para real retornar romper seleccionar si }
-Romper = { booleano cadena caracter caso defecto entero fin_funcion fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
+Retorno = { fin_funcion }
+Romper = { booleano cadena caracter caso defecto entero fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
 S = { EOF }
-Sentencia = { }
 Sentencia_Estructura = { fin_estructura }
-Sentencia_Funcion = { fin_funcion }
-Sentencia_Funcion_id = { fin_funcion }
+Sentencia_Funcion = { retornar }
+Sentencia_Funcion_id = { retornar }
+Sentencia_HMientras = { booleano cadena caracter caso defecto entero fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
+Sentencia_HMientras_id = { booleano cadena caracter caso defecto entero fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
+Sentencia_HMientras’ = { booleano cadena caracter caso defecto entero fin_mientras fin_para fin_principal fin_seleccionar fin_si hacer id imprimir leer mientras para real retornar romper seleccionar si si_no }
 Sentencia_Mientras = { fin_mientras }
 Sentencia_Mientras_id = { fin_mientras }
 Sentencia_Para = { fin_para }
 Sentencia_Para_id = { fin_para }
-Sentencia_Principal = { fin_principal mientras }
-Sentencia_Principal_id = { fin_principal mientras }
+Sentencia_Principal = { fin_principal }
+Sentencia_Principal_id = { fin_principal }
 Sentencia_Seleccionar = { caso defecto fin_seleccionar }
 Sentencia_Seleccionar_id = { caso defecto fin_seleccionar }
 Sentencia_Si = { fin_si si_no }
@@ -372,8 +416,12 @@ S -> Global Main Global EOF  =
 { estructura funcion funcion_principal }
 Global -> estructura id Sentencia_Estructura fin_estructura Global   = 
 { estructura }
-Global -> funcion Tipo id tk_par_izq Param_Funcion tk_par_der hacer Sentencia_Funcion fin_funcion Global   = 
+Global -> funcion Global’   = 
 { funcion }
+Global’ -> Tipo id tk_par_izq Param_Funcion tk_par_der hacer Sentencia_Funcion Retorno fin_funcion Global   = 
+{ booleano cadena caracter entero real }
+Global’ -> Identificador id tk_par_izq Param_Funcion tk_par_der hacer Sentencia_Funcion Retorno fin_funcion Global   = 
+{ id }
 Global ->   = 
 { EOF funcion_principal }
 Main -> funcion_principal Sentencia_Principal fin_principal  = 
@@ -417,7 +465,7 @@ Sentencia_Principal -> Identificador Sentencia_Principal_id  =
 Sentencia_Principal -> Declaracion Sentencia_Principal  = 
 { booleano cadena caracter entero real }
 Sentencia_Principal ->   = 
-{ fin_principal mientras }
+{ fin_principal }
 Sentencia_Principal_id -> tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Principal   = 
 { tk_par_izq }
 Sentencia_Principal_id -> tk_asig Valor tk_pyc Sentencia_Principal  = 
@@ -446,8 +494,6 @@ Sentencia_Si_id -> tk_asig Valor tk_pyc Sentencia_Si  =
 { tk_asig }
 Sentencia_Si_id -> id tk_pyc Sentencia_Si  = 
 { id }
-Sentencia -> en condicional mientras  = 
-{ en }
 Sentencia_Mientras -> Condicional Sentencia_Mientras   = 
 { seleccionar si }
 Sentencia_Mientras -> Ciclo Sentencia_Mientras   = 
@@ -469,6 +515,36 @@ Sentencia_Mientras_id -> tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Mientr
 Sentencia_Mientras_id -> tk_asig Valor tk_pyc Sentencia_Mientras  = 
 { tk_asig }
 Sentencia_Mientras_id -> id tk_pyc Sentencia_Mientras  = 
+{ id }
+Sentencia_HMientras -> Condicional Sentencia_HMientras   = 
+{ seleccionar si }
+Sentencia_HMientras -> CicloH Sentencia_HMientras   = 
+{ hacer para }
+Sentencia_HMientras -> Leer Sentencia_HMientras   = 
+{ leer }
+Sentencia_HMientras -> Imprimir Sentencia_HMientras   = 
+{ imprimir }
+Sentencia_HMientras -> Romper Sentencia_HMientras  = 
+{ romper }
+Sentencia_HMientras -> Identificador Sentencia_HMientras_id  = 
+{ id }
+Sentencia_HMientras -> Declaracion Sentencia_HMientras   = 
+{ booleano cadena caracter entero real }
+Sentencia_HMientras -> mientras tk_par_izq Valor tk_par_der Sentencia_HMientras’   = 
+{ mientras }
+Sentencia_HMientras’ -> tk_pyc  = 
+{ tk_pyc }
+Sentencia_HMientras’ -> hacer Sentencia_Mientras fin_mientras Sentencia_HMientras  = 
+{ hacer }
+CicloH -> para tk_par_izq Declaracion_Para tk_pyc Valor tk_pyc Valor tk_par_der hacer Sentencia_Para fin_para  = 
+{ para }
+CicloH -> hacer Sentencia_HMientras mientras tk_par_izq Valor tk_par_der  = 
+{ hacer }
+Sentencia_HMientras_id -> tk_par_izq Parametro tk_par_der tk_pyc Sentencia_HMientras  = 
+{ tk_par_izq }
+Sentencia_HMientras_id -> tk_asig Valor tk_pyc Sentencia_HMientras  = 
+{ tk_asig }
+Sentencia_HMientras_id -> id tk_pyc Sentencia_HMientras  = 
 { id }
 Sentencia_Para -> Condicional Sentencia_Para   = 
 { seleccionar si }
@@ -524,14 +600,12 @@ Sentencia_Funcion -> Imprimir Sentencia_Funcion   =
 { imprimir }
 Sentencia_Funcion -> Romper Sentencia_Funcion  = 
 { romper }
-Sentencia_Funcion -> Retorno Sentencia_Funcion  = 
-{ retornar }
 Sentencia_Funcion -> Declaracion Sentencia_Funcion   = 
 { booleano cadena caracter entero real }
 Sentencia_Funcion -> Identificador Sentencia_Funcion_id  = 
 { id }
 Sentencia_Funcion ->   = 
-{ fin_funcion }
+{ retornar }
 Sentencia_Funcion_id -> tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Funcion  = 
 { tk_par_izq }
 Sentencia_Funcion_id -> tk_asig Valor tk_pyc Sentencia_Funcion  = 
@@ -564,12 +638,18 @@ Declaracion_Para’ -> id  =
 { id }
 Declaracion_Para’ ->   = 
 { tk_asig }
-Ciclo -> hacer Sentencia_Principal mientras tk_par_izq Valor tk_par_der tk_pyc  = 
+Ciclo -> hacer Sentencia_HMientras  = 
 { hacer }
 Ciclo -> mientras tk_par_izq Valor tk_par_der hacer Sentencia_Mientras fin_mientras  = 
 { mientras }
-Leer -> leer tk_par_izq Identificador tk_par_der tk_pyc  = 
+Leer -> leer tk_par_izq Leer’ tk_par_der tk_pyc  = 
 { leer }
+Leer’ -> id Leer’’  = 
+{ id }
+Leer’’ -> tk_punto Leer’  = 
+{ tk_punto }
+Leer’’ ->  = 
+{ tk_par_der }
 Imprimir -> imprimir tk_par_izq Imprimir’ tk_par_der tk_pyc   = 
 { imprimir }
 Imprimir’ -> Valor Imprimir’’  = 
@@ -588,6 +668,8 @@ Param_Funcion -> Tipo id Param_Funcion’  =
 { booleano cadena caracter entero real }
 Param_Funcion -> Identificador id Param_Funcion’  = 
 { id }
+Param_Funcion ->   = 
+{ tk_par_der }
 Param_Funcion’ -> tk_coma Tipo id Param_Funcion’  = 
 { tk_coma }
 Param_Funcion’ -> tk_coma Identificador id Param_Funcion’  = 
@@ -608,7 +690,7 @@ Parametro’’ -> Valor Parametro’  =
 { falso id tk_cadena tk_caracter tk_entero tk_menos tk_neg tk_par_izq tk_real verdadero }
 Parametro’’ -> Identificador Parametro’  = 
 { id }
-Valor -> id Func Valor’  = 
+Valor -> Identificador Func Valor’  = 
 { id }
 Valor -> tk_real Valor’  = 
 { tk_real }
@@ -679,5 +761,5 @@ Identificador -> id Identificador’  =
 Identificador’ -> tk_punto id Identificador’  = 
 { tk_punto }
 Identificador’ ->   = 
-{ id tk_asig tk_coma tk_par_der tk_par_izq }
+{ id tk_asig tk_coma tk_dif tk_div tk_dosp tk_igual tk_mas tk_mayor tk_mayor_igual tk_menor tk_menor_igual tk_menos tk_mod tk_mult tk_o tk_par_der tk_par_izq tk_pyc tk_y }
 

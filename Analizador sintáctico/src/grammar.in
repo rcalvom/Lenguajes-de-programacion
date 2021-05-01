@@ -1,6 +1,8 @@
 S Global Main Global EOF
 Global estructura id Sentencia_Estructura fin_estructura Global 
-Global funcion Tipo id tk_par_izq Param_Funcion tk_par_der hacer Sentencia_Funcion Retorno fin_funcion Global 
+Global funcion Global’ 
+Global’ Tipo id tk_par_izq Param_Funcion tk_par_der hacer Sentencia_Funcion Retorno fin_funcion Global 
+Global’ Identificador id tk_par_izq Param_Funcion tk_par_der hacer Sentencia_Funcion Retorno fin_funcion Global 
 Global 
 Main funcion_principal Sentencia_Principal fin_principal
 Declaracion_Asignacion_E tk_asig Valor Declaracion_Asignacion_E’
@@ -20,12 +22,17 @@ Sentencia_Principal Ciclo Sentencia_Principal
 Sentencia_Principal Leer Sentencia_Principal 
 Sentencia_Principal Imprimir Sentencia_Principal 
 Sentencia_Principal Romper Sentencia_Principal
-Sentencia_Principal Identificador Sentencia_Principal_id
+Sentencia_Principal id Sentencia_Principal_id
 Sentencia_Principal Declaracion Sentencia_Principal
 Sentencia_Principal 
-Sentencia_Principal_id tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Principal 
+Sentencia_Principal_id tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Principal
+Sentencia_Principal_id tk_punto id Sentencia_Principal_id’ id Asig tk_pyc Sentencia_Principal
 Sentencia_Principal_id tk_asig Valor tk_pyc Sentencia_Principal
 Sentencia_Principal_id id tk_pyc Sentencia_Principal
+Sentencia_Principal_id’ tk_punto id Sentencia_Principal_id’ 
+Sentencia_Principal_id’ 
+Asig tk_asig Valor
+Asig 
 Sentencia_Si Condicional Sentencia_Si 
 Sentencia_Si Ciclo Sentencia_Si 
 Sentencia_Si Leer Sentencia_Si 
@@ -49,13 +56,17 @@ Sentencia_Mientras_id tk_par_izq Parametro tk_par_der tk_pyc Sentencia_Mientras
 Sentencia_Mientras_id tk_asig Valor tk_pyc Sentencia_Mientras
 Sentencia_Mientras_id id tk_pyc Sentencia_Mientras
 Sentencia_HMientras Condicional Sentencia_HMientras 
-Sentencia_HMientras Ciclo Sentencia_HMientras 
+Sentencia_HMientras CicloH Sentencia_HMientras 
 Sentencia_HMientras Leer Sentencia_HMientras 
 Sentencia_HMientras Imprimir Sentencia_HMientras 
 Sentencia_HMientras Romper Sentencia_HMientras
 Sentencia_HMientras Identificador Sentencia_HMientras_id
 Sentencia_HMientras Declaracion Sentencia_HMientras 
-Sentencia_HMientras 
+Sentencia_HMientras mientras tk_par_izq Valor tk_par_der Sentencia_HMientras’ 
+Sentencia_HMientras’ tk_pyc
+Sentencia_HMientras’ hacer Sentencia_Mientras fin_mientras Sentencia_HMientras
+CicloH para tk_par_izq Declaracion_Para tk_pyc Valor tk_pyc Valor tk_par_der hacer Sentencia_Para fin_para
+CicloH hacer Sentencia_HMientras mientras tk_par_izq Valor tk_par_der
 Sentencia_HMientras_id tk_par_izq Parametro tk_par_der tk_pyc Sentencia_HMientras
 Sentencia_HMientras_id tk_asig Valor tk_pyc Sentencia_HMientras
 Sentencia_HMientras_id id tk_pyc Sentencia_HMientras
@@ -105,7 +116,7 @@ Declaracion_Para Identificador Declaracion_Para’ tk_asig Valor
 Declaracion_Para  
 Declaracion_Para’ id
 Declaracion_Para’ 
-Ciclo hacer Sentencia_HMientras mientras tk_par_izq Valor tk_par_der tk_pyc
+Ciclo hacer Sentencia_HMientras
 Ciclo mientras tk_par_izq Valor tk_par_der hacer Sentencia_Mientras fin_mientras
 Leer leer tk_par_izq Leer’ tk_par_der tk_pyc
 Leer’ id Leer’’
@@ -120,6 +131,7 @@ Retorno retornar Valor tk_pyc
 Romper romper tk_pyc 
 Param_Funcion Tipo id Param_Funcion’
 Param_Funcion Identificador id Param_Funcion’
+Param_Funcion 
 Param_Funcion’ tk_coma Tipo id Param_Funcion’
 Param_Funcion’ tk_coma Identificador id Param_Funcion’
 Param_Funcion’ 
@@ -130,7 +142,7 @@ Parametro’ tk_coma Parametro’’
 Parametro’ 
 Parametro’’ Valor Parametro’
 Parametro’’ Identificador Parametro’
-Valor id Func Valor’
+Valor Identificador Func Valor’
 Valor tk_real Valor’
 Valor tk_entero Valor’
 Valor falso Valor’
